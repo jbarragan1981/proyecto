@@ -24,6 +24,30 @@
                 }
             ]
         }, {
+            "Id": "PC",
+            "Material": "PC",
+            "Brand": "Compaq",
+            "Model": "620",
+            "Weight": "2.5 KG",
+            "Price": "320",
+            "Currency": "EUR",
+            "Properties": [
+                {
+                    "Id": "1",
+                    "Text": "Text 1"
+                }, {
+                    "Id": "2",
+                    "Text": "Text 2"
+                }, {
+                    "Id": "3",
+                    "Text": "Text 3"
+                }, {
+                    "Id": "4",
+                    "Text": "Text 4"
+                }
+            ]
+        },
+        {
             "Id": "P2",
             "Material": "PC",
             "Brand": "Compaq",
