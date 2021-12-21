@@ -1,0 +1,46 @@
+<mvc:View controllerName="logaligroup.List.controller.ListTypes" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <IconTabBar>
+                            <items>
+                                <IconTabFilter text="{i18n>objectList}">
+                                    <List items="{/Products}" headerText="Products">
+                                        <ObjectListItem title="{Material} {Brand} {Model}" type="Active" press="onListItemPress" number="{
+                                                                                                                                                                                                                                                                        				parts:[{path:'Price'},{path:'Currency'}],
+                                                                                                                                                                                                                                                                        				type: 'sap.ui.model.type.Currency',
+                                                                                                                                                                                                                                                                        				formatOptions: {showMeasure: false}
+                                                                                                                                                                                                                                                                        			}" numberUnit="{Currency}">
+                                            <ObjectAttribute text="{Brand}"/>
+                                            <ObjectAttribute text="{Weight}"/>
+                                        </ObjectListItem>
+                                    </List>
+                                </IconTabFilter>
+                                <IconTabFilter text="{i18n>standardList}">
+                                    <List id="ShortProductList" headerText="Products" items="{/Products}">
+                                        <items>
+                                            <StandardListItem title="{Material} {Brand} {Model}" description="{Weight}" info="{Price} {Currency}" type="Active"/>
+                                        </items>
+                                    </List>
+                                </IconTabFilter>
+                                <IconTabFilter text="{i18n>inputList}">
+                                    <List items="{/Products}" headerText="Productos">
+                                        <InputListItem label="{Material} {Brand} {Model}">
+                                            <Select items="{Properties}">
+                                                <core:Item key="{Id}" text="{Text}"/>
+                                            </Select>
+                                        </InputListItem>
+                                    </List>
+                                </IconTabFilter>
+                                <IconTabFilter text="{i18n>notificationList}"></IconTabFilter>
+                                <IconTabFilter text="{i18n>customList}"></IconTabFilter>
+                            </items>
+                        </IconTabBar>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
