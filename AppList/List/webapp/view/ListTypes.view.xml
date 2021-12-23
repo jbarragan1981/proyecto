@@ -7,31 +7,55 @@
                         <IconTabBar>
                             <items>
                                 <IconTabFilter text="{i18n>objectList}">
-                                    <List items="{path: '/Products', 
-                                                  filters: [{
-                                                      path:'Brand',
-                                                      operator: 'EQ',
-                                                      value1: 'Compaq'
-                                                  }]}" headerText="Products">
+                                    <List items="{path: '/Products',
+                                                                                                                                  filters: [{
+                                                                                                                                      path:'Brand',
+                                                                                                                                      operator: 'EQ',
+                                                                                                                                      value1: 'Compaq'
+                                                                                                                                  }]}" headerText="Products">
                                         <ObjectListItem title="{Material} {Brand} {Model}" type="Active" press="onListItemPress" number="{
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        				parts:[{path:'Price'},{path:'Currency'}],
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        				type: 'sap.ui.model.type.Currency',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        				formatOptions: {showMeasure: false}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        			}" numberUnit="{Currency}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                				parts:[{path:'Price'},{path:'Currency'}],
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                				type: 'sap.ui.model.type.Currency',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                				formatOptions: {showMeasure: false}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                			}" numberUnit="{Currency}">
                                             <ObjectAttribute text="{Brand}"/>
                                             <ObjectAttribute text="{Weight}"/>
                                         </ObjectListItem>
                                     </List>
                                 </IconTabFilter>
                                 <IconTabFilter text="{i18n>standardList}">
-                                    <List id="ShortProductList" headerText="Products" items="{/Products}">
+                                    <Select selectedKey="{/typeSelection}">
+                                        <items>
+                                            <core:Item key="None" text="{i18n>none}"/>
+                                            <core:Item key="MultiSelect" text="{i18n>multiSelect}"/>
+                                            <core:Item key="SingleSelect" text="{i18n>singleSelect}"/>
+                                            <core:Item key="SingleSelectLeft" text="{i18n>singleSelectLeft}"/>
+                                            <core:Item key="SingleSelectMaster" text="{i18n>singleSelectMaster}"/>
+                                        </items>
+                                    </Select>
+                                    <Button text="{i18n>showSelected}" press="onShowSelected" ariaDescribedBy="Items Seleccionados">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1"/>
+                                        </layoutData>
+                                    </Button>
+                                    <Button text="{i18n>deleteSelectedItems}" press="onDeleteSelectedRows" ariaDescribedBy="Items Seleccionados">
+                                        <layoutData>
+                                            <FlexItemData growFactor="1"/>
+                                        </layoutData>
+                                    </Button>
+                                    <List id="standardList" headerText="Products" items="{path: '/Products',
+                                                                                                             sorter:{
+                                                                                                                    path : 'Brand',
+                                                                                                                    descending: true,
+                                                                                                                    group : true
+                                                                                                                }}" mode="{/typeSelection}">
                                         <items>
                                             <StandardListItem title="{Material} {Brand} {Model}" description="{Weight}" info="{Price} {Currency}" type="Active"/>
                                         </items>
                                     </List>
                                 </IconTabFilter>
                                 <IconTabFilter text="{i18n>inputList}">
-                                    <List items="{/Products}" headerText="Productos">
+                                    <List items="{/Products}" mode="Delete" delete="onDeleteRow" headerText="Productos">
                                         <InputListItem label="{Material} {Brand} {Model}">
                                             <Select items="{Properties}">
                                                 <core:Item key="{Id}" text="{Text}"/>
