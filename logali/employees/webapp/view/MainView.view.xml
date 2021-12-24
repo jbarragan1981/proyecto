@@ -10,53 +10,18 @@
                     <content>
                         <HBox id="hbox1">
                             <Label id="labelEmployee" labelFor="inputEmployee" text="{i18n>labelEmployee}" class="sapUiSmallMargin"/>
-                            <Input id="inputEmployee" value="{/EmployeeId}" maxLength="6" width="200px" class="sapUiSmallMarginEnd" liveChange="onValidate"/>
+                            <Input id="inputEmployee" value="{jsonCountries>/EmployeeId}" maxLength="6" width="200px" class="sapUiSmallMarginEnd" liveChange="onValidate"/>
                             <Label id="labelCountry" labelFor="slCountry" text="{i18n>labelCountry}" class="sapUiSmallMargin" visible="true"/>
-                            <Select id="slCountry" forceSelection="false" selectedKey="{/CountryKey}" items="{/ListCountry}" visible="true">
+                            <Select id="slCountry" forceSelection="false" selectedKey="{jsonCountries>/CountryKey}" items="{jsonCountries>/ListCountry}" visible="true">
                                 <items>
-                                    <core:Item key="{Key}" text="{Text}"/>                                    
+                                    <core:Item key="{jsonCountries>Key}" text="{jsonCountries>Text}"/>                                    
                                 </items>
                             </Select>
                             <Button id="filtro" text="{i18n>btnFilter}" icon="sap-icon://search" press="onFilter" class="sapUiSmallMarginEnd"/>
                             <Button id="clear" text="{i18n>btnClear}"  icon="sap-icon://clear-filter" press="onClearFilter" class="sapUiSmallMarginEnd"/>
                         </HBox>
                          <HBox>
-                            <Panel>
-                                <Table id="tableEmployee" items="{/Employees}">
-                                    <columns>
-                                        <Column> 
-                                            <header>
-                                                <Label text="{i18n>tableId}"/>
-                                            </header>
-                                        </Column>
-                                        <Column> 
-                                            <header>
-                                                <Label text="{i18n>tableName}"/>
-                                            </header>
-                                        </Column>
-                                        <Column> 
-                                            <header>
-                                                <Label text="{i18n>tableCountry}"/>
-                                            </header>
-                                        </Column>
-                                        <Column> 
-                                            <header>
-                                                <Label text="{i18n>tableCity}"/>
-                                            </header>
-                                    </Column>
-                                    </columns>
-                                    <items>
-                                        <ColumnListItem >
-                                            <cells>
-                                                <Label text="{EmployeeID}"/>
-                                                <Label text="{LastName}, {FirstName}"/>
-                                                <Label text="{Country}"/>
-                                                <Label text="{City}"/>
-                                            </cells>
-                                        </ColumnListItem>
-                                    </items>
-                                </Table>
-                            </Panel>
+                            <core:Fragment fragmentName="logaligroup.employees.fragment.TableEmployee" type="XML"/>
                          </HBox>
                     </content>
                 </Page>
