@@ -3,9 +3,6 @@
             displayBlock="true" 
             xmlns="sap.m"
             xmlns:core="sap.ui.core">
-    <Shell id="shell">
-        <App id="app">
-            <pages>
                 <Page id="page" title="{i18n>title}">
                     <content>
                         <HBox id="hbox1">
@@ -25,7 +22,5 @@
                          </HBox>
                     </content>
                 </Page>
-            </pages>
-        </App>
-    </Shell>
+   
 </mvc:View>

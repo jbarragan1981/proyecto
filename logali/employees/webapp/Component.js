@@ -1,9 +1,8 @@
 sap.ui.define([
-        "sap/ui/core/UIComponent",
-        "sap/ui/Device",
-        "logaligroup/employees/model/models"
+        "sap/ui/core/UIComponent"
+        //,"logaligroup/employees/model/models"
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, models) {
         "use strict";
 
         return UIComponent.extend("logaligroup.employees.Component", {
@@ -24,7 +23,7 @@ sap.ui.define([
                 this.getRouter().initialize();
 
                 // set the device model
-                this.setModel(models.createDeviceModel(), "device");
+                //this.setModel(models.createDeviceModel(), "device");
             }
         });
     }
