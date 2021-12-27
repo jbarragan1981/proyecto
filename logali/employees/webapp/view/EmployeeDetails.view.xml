@@ -3,50 +3,67 @@
           displayBlock="true" 
           xmlns="sap.m"
           xmlns:core="sap.ui.core">
-    <Page id="pag1" title="{i18n>employeeDetails}">           
-        <Panel id="panel1">        
-            <FlexBox id="flex1" height="65px" alignItems="Center" justifyContent="Center">
+    <Page title="{i18n>employeeDetails}">   
+        
+        <Panel>
+        
+            <FlexBox height="65px" alignItems="Center" justifyContent="Center">
                 <items>
-                    <Text id="text1" text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}" class="boldText"/>
+                    <Text text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}" class="boldText"/>
                 </items>
             </FlexBox>
-            <FlexBox id="flex2" height="65px" alignItems="Start" justifyContent="SpaceBetween">
+
+            <FlexBox height="65px" alignItems="Start" justifyContent="SpaceBetween">
                 <items>
-                    <VBox id="box1">
-                        <Text id="text2" text="{i18n>employeeID}" class="boldText sapUiTinyMarginEnd"/>
-                        <Text id="text3" text="{jsonEmployees>EmployeeID}"/>
+                    <VBox>
+                        <Text text="{i18n>employeeID}" class="boldText sapUiTinyMarginEnd"/>
+                        <Text text="{jsonEmployees>EmployeeID}"/>
                     </VBox>
-                    <VBox id="box2">
-                        <Text id="text4" text="{i18n>titleEmployee}" class="boldText"/>
-                        <Text id="text5" text="{jsonEmployees>Title}"/>                    
+                    <VBox>
+                        <Text text="{i18n>titleEmployee}" class="boldText"/>
+                        <Text text="{jsonEmployees>Title}"/>                    
                     </VBox>
                 </items>
             </FlexBox>
-            <FlexBox id="flex3" alignItems="Start">
+
+            <FlexBox alignItems="Start">
                 <items>
-                    <HBox id="box3">
-                        <Text id="text6" text="{i18n>countryCode}" class="boldText sapUiTinyMarginEnd"/>
-                        <Text id="text7" text="{jsonEmployees>Country}"/>
+                    <HBox>
+                        <Text text="{i18n>countryCode}" class="boldText sapUiTinyMarginEnd"/>
+                        <Text text="{jsonEmployees>Country}"/>
                         <layoutData>
-                            <FlexItemData id="flexitem" growFactor="3"></FlexItemData>
+                            <FlexItemData growFactor="3"></FlexItemData>
                         </layoutData>
                     </HBox>
-                    <HBox id="box4">
-                        <Text id="text8" text="{i18n>city}" class="boldText sapUiTinyMarginEnd"/>
-                        <Text id="text9" text="{jsonEmployees>City}"/>
+                    <HBox>
+                        <Text text="{i18n>city}" class="boldText sapUiTinyMarginEnd"/>
+                        <Text text="{jsonEmployees>City}"/>
                         <layoutData>
-                            <FlexItemData id="flexitem2"  growFactor="2"></FlexItemData>
+                            <FlexItemData growFactor="2"></FlexItemData>
                         </layoutData>
                     </HBox>
-                    <FlexBox  id="flex6" direction="Row" alignItems="Start">
-                        <Text id="text10" text="{i18n>postalCode}" class="boldText sapUiTinyMarginEnd"/>
-                        <Text id="text11" text="{jsonEmployees>PostalCode}"/>
+                    <FlexBox direction="Row" alignItems="Start">
+                        <Text text="{i18n>postalCode}" class="boldText sapUiTinyMarginEnd"/>
+                        <Text text="{jsonEmployees>PostalCode}"/>
                         <layoutData>
-                            <FlexItemData  id="flexitem3" growFactor="1"></FlexItemData>
+                            <FlexItemData growFactor="1"></FlexItemData>
                         </layoutData>
                     </FlexBox>                
                 </items>
             </FlexBox>
+
         </Panel>
+
+        <Panel class="sapUiSiceCompact" backgroundDesign="Transparent">
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="{i18n>incidence} {= ${jsonEmployees>Country} !=='US' ? ${i18n>europe} : ${i18n>us}}"></Title>
+                    <ToolbarSpacer ></ToolbarSpacer>
+                    <Button text="{i18n>createIncidence}" press="onCreateIncidence"></Button>
+                </Toolbar>
+            </headerToolbar>
+            <Panel id="tableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent"></Panel>
+        </Panel>
+
     </Page>
 </mvc:View>
