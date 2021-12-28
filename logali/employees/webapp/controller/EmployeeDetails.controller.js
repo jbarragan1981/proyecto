@@ -1,6 +1,6 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "logaligroup/Employees/model/formatter"
+    "logaligroup/employees/model/formatter"
 ], function (Controller, formatter) {
 
     function onInit() {
