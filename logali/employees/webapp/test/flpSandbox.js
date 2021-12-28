@@ -62,7 +62,7 @@ sap.ui.define([
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
 									"additionalInformation": "SAPUI5.Component=logaligroup.employees",
-									"url": sap.ui.require.toUrl("logaligroup/employees")
+									"url": sap.ui.require.toUrl("logaligroup/employees/index.html")
 								}
 							}
 						}

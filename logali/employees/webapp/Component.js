@@ -1,9 +1,8 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
-        "sap/ui/Device",
         "logaligroup/employees/model/models"
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, models) {
         "use strict";
 
         return UIComponent.extend("logaligroup.employees.Component", {
