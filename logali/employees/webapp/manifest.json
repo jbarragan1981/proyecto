@@ -11,7 +11,7 @@
         "description": "{{ appDescription }}",
         "dataSources": {
             "Northwind.svc": {
-                "uri": "Northwind/V2/Northwind/Northwind.svc/",
+                "uri": "/V2/Northwind/Northwind.svc/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
