@@ -4,7 +4,7 @@ sap.ui.define([
 ], function (Controller, formatter) {
 
     function onInit() {
-
+        this._bus = sap.ui.getCore().getEventBus();
     };
 
     function onCreateIncidence() {
@@ -17,10 +17,8 @@ sap.ui.define([
         incidenceModel.refresh();
         newIncidence.bindElement("incidenceModel>/" + index);
         tableIncidence.addContent(newIncidence);
-
     };
     function onDeleteIncidence(oEvent) {
-
         var tableIncidence = this.getView().byId("tableIncidence");
         var rowIncidence = oEvent.getSource().getParent().getParent();
         var incidenceModel = this.getView().getModel("incidenceModel");

@@ -10,7 +10,7 @@
             "target": "$1"
         },
         {
-            "authenticationType": "none",
+            "authenticationType": "xsuaa",
             "csrfProtection": false,
             "source": "^/sap/opu/odata/sap/YSAPUI5_SRV_01/",
             "destination": "logaligroupERP"
