@@ -19,24 +19,14 @@ sap.ui.define([
         tableIncidence.addContent(newIncidence);
     };
     function onDeleteIncidence(oEvent) {
-        var tableIncidence = this.getView().byId("tableIncidence");
-        var rowIncidence = oEvent.getSource().getParent().getParent();
-        var incidenceModel = this.getView().getModel("incidenceModel");
-        var odata = incidenceModel.getData();
-        var contextObj = rowIncidence.getBindingContext("incidenceModel");
-
-        odata.splice(contextObj.index - 1, 1);
-        for (var i in odata) {
-            odata[i].index = parseInt(i) + 1;
-        };
-
-        incidenceModel.refresh();
-        tableIncidence.removeContent(rowIncidence);
-
-        for (var j in tableIncidence.getContent()){
-            tableIncidence.getContent()[j].bindElement("incidenceModel>/"+j);
-        }
+        var contexjObj = oEvent.getSource().getBindingContext("incidenceModel").getObject();
+        this._bus.publish("incidence", "onDeleteIncidence", {
+        IncidenceId: contexjObj.IncidenceId,
+        SapId: contexjObj.SapId,
+        EmployeeId: contexjObj.EmployeeId
+        });
     };
+       
     function onSaveIncidence(oEvent) {
         var incidence = oEvent.getSource().getParent().getParent();
         var incidenceRow = incidence.getBindingContext("incidenceModel");
