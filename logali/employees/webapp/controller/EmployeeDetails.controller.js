@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "logaligroup/employees/model/formatter"
-], function (Controller, formatter) {
+    "logaligroup/employees/model/formatter",
+    "sap/m/MessageBox"
+], function (Controller, formatter, MessageBox) {
 
     function onInit() {
         this._bus = sap.ui.getCore().getEventBus();
@@ -13,7 +14,7 @@ sap.ui.define([
         var incidenceModel = this.getView().getModel("incidenceModel");
         var odata = incidenceModel.getData();
         var index = odata.length;
-        odata.push({ index: index + 1 });
+        odata.push({ index: index + 1,  _ValidateDate: false });
         incidenceModel.refresh();
         newIncidence.bindElement("incidenceModel>/" + index);
         tableIncidence.addContent(newIncidence);
@@ -34,15 +35,54 @@ sap.ui.define([
     };
 
     function updateIncidenceCreationDate(oEvent) {
-        var context = oEvent.getSource().getBindingContext("incidenceModel");
-        var contextObj = context.getObject();
-        contextObj.CreationDateX = true;
+        let context = oEvent.getSource().getBindingContext("incidenceModel");
+        let contextObj = context.getObject();
+        let oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+
+        if (!oEvent.getSource().isValidValue()) {
+            contextObj._ValidateDate = false;
+            contextObj.CreationDateState = "Error";
+            MessageBox.error(oResourceBundle.getText("errorCreationDateValue"), {
+                title: "Error",
+                onClose: null,
+                styleClass: "",
+                actions: MessageBox.Action.Close,
+                emphasizedAction: null,
+                initialFocus: null,
+                textDirection: sap.ui.core.TextDirection.Inherit
+            });
+        } else {
+            contextObj.CreationDateX = true;
+            contextObj._ValidateDate = true;
+            contextObj.CreationDateState = "None";
+        };
+
+        context.getModel().refresh();
     };
 
     function updateIncidenceReason(oEvent) {
-        var context = oEvent.getSource().getBindingContext("incidenceModel");
-        var contextObj = context.getObject();
-        contextObj.ReasonX = true;
+        let context = oEvent.getSource().getBindingContext("incidenceModel");
+        let contextObj = context.getObject();
+
+        if (oEvent.getSource().getValue()) {
+            contextObj.ReasonX = true;
+            contextObj.ReasonState = "None";
+        } else {
+            contextObj.ReasonState = "Error";
+
+            MessageBox.error(oResourceBundle.getText("errorIncidenceReason"), {
+                title: "Error",
+                onClose: null,
+                styleClass: "",
+                actions: MessageBox.Action.Close,
+                emphasizedAction: null,
+                initialFocus: null,
+                textDirection: sap.ui.core.TextDirection.Inherit
+            });
+
+        };      
+
+        context.getModel().refresh();
     };
 
     function updateIncidenceType(oEvent) {
