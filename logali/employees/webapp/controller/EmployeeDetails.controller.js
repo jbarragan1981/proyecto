@@ -20,11 +20,21 @@ sap.ui.define([
         tableIncidence.addContent(newIncidence);
     };
     function onDeleteIncidence(oEvent) {
+
         var contexjObj = oEvent.getSource().getBindingContext("incidenceModel").getObject();
-        this._bus.publish("incidence", "onDeleteIncidence", {
-        IncidenceId: contexjObj.IncidenceId,
-        SapId: contexjObj.SapId,
-        EmployeeId: contexjObj.EmployeeId
+
+        MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmDeleteIncidence"), {
+            onClose: function (oAction) {
+
+                if (oAction === "OK") {
+                    this._bus.publish("incidence", "onDeleteIncidence", {
+                        IncidenceId: contexjObj.IncidenceId,
+                        SapId: contexjObj.SapId,
+                        EmployeeId: contexjObj.EmployeeId
+                    });
+                }
+                
+            }.bind(this)
         });
     };
        
@@ -56,6 +66,11 @@ sap.ui.define([
             contextObj._ValidateDate = true;
             contextObj.CreationDateState = "None";
         };
+        if (oEvent.getSource().isValidValue() && contextObj.Reason) {
+            contextObj.EnabledSave = true;
+        } else {
+            contextObj.EnabledSave = false;
+        };
 
         context.getModel().refresh();
     };
@@ -82,6 +97,11 @@ sap.ui.define([
 
         };      
 
+        if (contextObj._ValidateDate && oEvent.getSource().getValue()) {
+            contextObj.EnabledSave = true;
+        } else {
+            contextObj.EnabledSave = false;
+        };
         context.getModel().refresh();
     };
 
