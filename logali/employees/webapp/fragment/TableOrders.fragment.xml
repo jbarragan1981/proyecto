@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
-    <Table items="{odataNorthwind>Orders}" width="700px">
+    <Table items="{odataNorthwind>Orders}"  width="700px">
         <columns>
             <Column>
                 <header>
@@ -18,7 +18,7 @@
             </Column>
         </columns>
         <items>
-            <ColumnListItem>
+            <ColumnListItem type="Navigation" press="toOrderDetails">
                 <cells>
                     <Label text="{odataNorthwind>OrderID}"/>
                     <Label text="{odataNorthwind>Freight}"/>

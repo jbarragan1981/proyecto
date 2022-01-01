@@ -3,11 +3,8 @@
           displayBlock="true" 
           xmlns="sap.m"
           xmlns:core="sap.ui.core"
-          xmlns:f="sap.f">
-	<Shell id="shell">
-		<App id="app">
-			<pages>
-                <Page showHeader="false">
+          xmlns:f="sap.f">	
+        <Page showHeader="false">
                     <content>
                        <f:FlexibleColumnLayout id="fcl" backgroundDesign="Solid" layout="{jsonLayout>/ActiveKey}">
                             <f:beginColumnPages>
@@ -30,8 +27,5 @@
                             </Select>
                         </Toolbar>
                     </footer>
-                </Page>
-            </pages>
-		</App>
-	</Shell>
+           </Page>           
 </mvc:View>
