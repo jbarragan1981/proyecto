@@ -1,8 +1,8 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "logaligroup/employees/controller/Base.controller",
     "logaligroup/employees/model/formatter",
     "sap/m/MessageBox"
-], function (Controller, formatter, MessageBox) {
+], function (Base, formatter, MessageBox) {
 
     function onInit() {
         this._bus = sap.ui.getCore().getEventBus();
@@ -110,16 +110,8 @@ sap.ui.define([
         var contextObj = context.getObject();
         contextObj.TypeX = true;
     };
-
-    function toOrderDetails(oEvent) {
-        var orderID = oEvent.getSource().getBindingContext("odataNorthwind").getObject().OrderID;
-        var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-        oRouter.navTo("RouteOrderDetails", {
-            OrderID : orderID
-        });
-    };
-   
-    var employeeDetail = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {});
+    
+    var employeeDetail = Base.extend("logaligroup.employees.controller.EmployeeDetails", {});
     employeeDetail.prototype.onInit = onInit;
     employeeDetail.prototype.onCreateIncidence = onCreateIncidence;
     employeeDetail.prototype.onDeleteIncidence = onDeleteIncidence;
@@ -129,7 +121,6 @@ sap.ui.define([
     employeeDetail.prototype.updateIncidenceCreationDate = updateIncidenceCreationDate;
     employeeDetail.prototype.updateIncidenceReason = updateIncidenceReason;
     employeeDetail.prototype.updateIncidenceType = updateIncidenceType;
-    employeeDetail.prototype.toOrderDetails = toOrderDetails;
 
     return employeeDetail;
 }); 
