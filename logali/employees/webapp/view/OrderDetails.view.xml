@@ -35,7 +35,7 @@
                                     <f:FormElement label="{i18n>freight}">
                                         <f:fields>
                                             <Text text="{odataNorthwind>Freight}"/>
-                                        </f:fields>
+                                        </f:fields>                                        
                                     </f:FormElement>
                                     <f:FormElement label="{i18n>shipName}">
                                         <f:fields>
