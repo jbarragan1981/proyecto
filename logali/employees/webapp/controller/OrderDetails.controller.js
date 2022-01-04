@@ -33,6 +33,36 @@ sap.ui.define([
             signature.clear();
         },
 
+        onSaveSignature: function (oEvent) {
+            const signature = this.byId("signature");
+            const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+            let signaturePng;
+
+            if (!signature.isFill()) {
+                MessageBox.error(oResourceBundle.getText("fillSignature"));
+            } else {
+                signaturePng = signature.getSignature().replace("data:image/png;base64,", "");
+                let objectOrder = oEvent.getSource().getBindingContext("odataNorthwind").getObject();
+                let body = {
+                    OrderId: objectOrder.OrderID.toString(),
+                    SapId: this.getOwnerComponent().SapId,
+                    EmployeeId: objectOrder.EmployeeID.toString(),
+                    MimeType: "image/png",
+                    MediaContent: signaturePng
+                };
+
+                this.getView().getModel("incidenceModel").create("/SignatureSet", body, {
+                    success: function () {
+                        MessageBox.information(oResourceBundle.getText("signatureOk"));
+                    },
+                    error: function () {
+                        MessageBox.error(oResourceBundle.getText("signatureNotOk"));
+                    },
+
+                });
+            };
+        },
+
         factoryOrderDetails : function(listId, oContext) {
             var contextObject = oContext.getObject();
             contextObject.Currency = "EUR";

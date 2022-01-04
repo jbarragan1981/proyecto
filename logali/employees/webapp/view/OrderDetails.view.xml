@@ -6,14 +6,14 @@
           xmlns:l="sap.ui.layout"
           xmlns:f="sap.ui.layout.form"
           xmlns:sco="logaligroup.employees.control" >
-    <Page>
+    <Page id="pageOrder">
         <customHeader>
-            <Bar>
+            <Bar id="barId">
                 <contentLeft>
-                    <Button icon="sap-icon://nav-back" press="onBack"></Button>
+                    <Button id="back" icon="sap-icon://nav-back" press="onBack"></Button>
                 </contentLeft>
                 <contentMiddle>
-                    <Text text="{i18n>orderID} {odataNorthwind>OrderID}"></Text>
+                    <Text id="txtorden" text="{i18n>orderID} {odataNorthwind>OrderID}"></Text>
                 </contentMiddle>
             </Bar>
         </customHeader>
@@ -66,5 +66,11 @@
                 <List id="lOrderDetails" items="{path:'odataNorthwind>Order_Details', parameters:{expand : 'Product'}, factory: '.factoryOrderDetails'}"/>
             </Panel>
         </content>
+        <footer>
+            <Toolbar id="tool">
+                <ToolbarSpacer id="toolspacer"></ToolbarSpacer>
+                <Button id="grabar" text="{i18n>saveSignature}" press="onSaveSignature"></Button>
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>
