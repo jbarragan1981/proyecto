@@ -7,11 +7,33 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
 ], function (Controller, History, MessageBox, Filter, FilterOperator) {
     function _onObjectMatched(oEvent) {
-        this.getView().bindElement({
+        this.onClearSignature();
+        this.getView().bindElement({            
             path: "/Orders(" + oEvent.getParameter("arguments").OrderID + ")",
             model: "odataNorthwind"
         });
-    }
+
+        const objContext = this.getView().getModel("odataNorthwind").getContext("/Orders(" + oEvent.getParameter("arguments").OrderID + ")").getObject();
+        _readSignature(objContext.OrderID, objContext.EmployeeID); 
+    };
+    function _readSignature(orderId, employeeId) {
+
+        //Read Signature Image
+        this.getView().getModel("incidenceModel").read("/SignatureSet(OrderId='" + orderId
+            + "',SapId='" + this.getOwnerComponent().SapId
+            + "',EmployeeId='" + employeeId + "')", {
+            success: function (data) {
+                const signature = this.getView().byId("signature");
+                if (data.MediaContent !== "") {
+                    signature.setSignature("data:image/png;base64," + data.MediaContent);
+                }
+            }.bind(this),
+            error: function (data) {
+
+            }
+        });
+    };
+
     return Controller.extend("logaligroup.employees.controller.OrderDetails", {
         onInit: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);

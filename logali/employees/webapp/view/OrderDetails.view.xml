@@ -18,47 +18,47 @@
             </Bar>
         </customHeader>
         <content>
-            <Panel headerText="{i18n>customerID}: {odataNorthwind>CustomerID}">
-                <l:Grid defaultSpan="L6 M6 S12">
-                    <f:Form editable="false">
+            <Panel id="panelCust" headerText="{i18n>customerID}: {odataNorthwind>CustomerID}">
+                <l:Grid id="layaut1" defaultSpan="L6 M6 S12">
+                    <f:Form id="form1" editable="false">
                         <f:layout>
-                            <f:ResponsiveGridLayout labelSpanL="6" labelSpanM="6" labelSpanS="12"/>
+                            <f:ResponsiveGridLayout id="respGrid1" labelSpanL="6" labelSpanM="6" labelSpanS="12"/>
                         </f:layout>
                         <f:formContainers>
-                            <f:FormContainer>
+                            <f:FormContainer  id="form2">
                                 <f:formElements>
-                                    <f:FormElement label="{i18n>orderDate}">
+                                    <f:FormElement id="form3" label="{i18n>orderDate}">
                                         <f:fields>
-                                            <Text text="{path:'odataNorthwind>OrderDate', type:'sap.ui.model.odata.type.Date'}"/>
+                                            <Text id="text1" text="{path:'odataNorthwind>OrderDate', type:'sap.ui.model.odata.type.Date'}"/>
                                         </f:fields>
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>freight}">
+                                    <f:FormElement id="form4" label="{i18n>freight}">
                                         <f:fields>
-                                            <Text text="{odataNorthwind>Freight}"/>
+                                            <Text  id="text2" text="{odataNorthwind>Freight}"/>
                                         </f:fields>                                        
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>shipName}">
+                                    <f:FormElement id="form5" label="{i18n>shipName}">
                                         <f:fields>
-                                            <Text text="{odataNorthwind>ShipName}"/>
+                                            <Text  id="text3" text="{odataNorthwind>ShipName}"/>
                                         </f:fields>
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>shipAddress}">
+                                    <f:FormElement id="form6" label="{i18n>shipAddress}">
                                         <f:fields>
-                                            <Text text="{odataNorthwind>ShipAddress}"/>                                            
+                                            <Text  id="text4" text="{odataNorthwind>ShipAddress}"/>                                            
                                         </f:fields>
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>shipAddress}">
+                                    <f:FormElement id="form7" label="{i18n>shipAddress}">
                                         <f:fields>
-                                             <Text text="{odataNorthwind>ShipCity}, {odataNorthwind>ShipCountry}"/>
+                                             <Text  id="text5" text="{odataNorthwind>ShipCity}, {odataNorthwind>ShipCountry}"/>
                                         </f:fields>
                                     </f:FormElement>
                                 </f:formElements>
                             </f:FormContainer>
                         </f:formContainers>
                     </f:Form>
-                    <FlexBox class="sapUiTinyMarginTop">
+                    <FlexBox id="flex10" class="sapUiTinyMarginTop">
                         <sco:Signature id="signature"></sco:Signature>
-                        <Button text="{i18n>clear}" press="onClearSignature" class="sapUiTinyMarginBegin"></Button>
+                        <Button id="butClear" text="{i18n>clear}" press="onClearSignature" class="sapUiTinyMarginBegin"></Button>
                     </FlexBox>
                 </l:Grid>
             </Panel>
