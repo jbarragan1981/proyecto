@@ -19,8 +19,6 @@ sap.ui.define([
         }
     };
     function _readSignature(orderId, employeeId) {
-
-        //Read Signature Image
         this.getView().getModel("incidenceModel").read("/SignatureSet(OrderId='" + orderId + "',SapId='" + this.getOwnerComponent().SapId + "',EmployeeId='" + employeeId + "')", {
             success: function (data) {
                 const signature = this.getView().byId("signature");
@@ -112,6 +110,60 @@ sap.ui.define([
                 });
                 return customListItem;
             }
-        }
+        },
+        
+        
+     onFileBeforeUpload: function(oEvent) {
+
+        let fileName = oEvent.getParameter("fileName");
+        let objectContext = oEvent.getSource().getBindingContext("odataNorthwind").getObject();
+
+        let oHeaderSlug = new sap.m.UploadCollectionParameter({
+            name: "slug",
+            value: objectContext.OrderID + ";" + this.getOwnerComponent().SapId + ";"
+                + objectContext.EmployeeID
+                + ";" + fileName
+        });
+
+        oEvent.getParameters().addHeaderParameter(oHeaderSlug);
+    },
+
+     onFileChange: function (oEvent) {
+
+        let oUploadCollection = oEvent.getSource();
+
+        // Header CSRF token - Cross-site request forgery
+        let oHeaderToken = new sap.m.UploadCollectionParameter({
+            name: "x-csrf-token",
+            value: this.getView().getModel("incidenceModel").getSecurityToken()
+        });
+
+        oUploadCollection.addHeaderParameter(oHeaderToken);
+    },
+
+    onFileUploadCompleted: function (oEvent) {
+        oEvent.getSource().getBinding("items").refresh();
+    },
+
+     onFileDeleted: function (oEvent) {
+        let oUploadCollection = oEvent.getSource();
+        let sPath = oEvent.getParameter("item").getBindingContext("incidenceModel").getPath();
+
+        this.getView().getModel("incidenceModel").remove(sPath, {
+            success: function () {
+                oUploadCollection.getBinding("items").refresh();
+            },
+
+            error: function () {
+
+            }
+        });
+    },
+
+     downloadFile: function (oEvent) {
+        
+        const sPath = oEvent.getSource().getBindingContext("incidenceModel").getPath();
+        window.open("/sap/opu/odata/sap/YSAPUI5_SRV_01" + sPath + "/$value");
+    }
     });
 }); 
