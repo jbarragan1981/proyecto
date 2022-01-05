@@ -14,14 +14,14 @@ sap.ui.define([
         });
 
         const objContext = this.getView().getModel("odataNorthwind").getContext("/Orders(" + oEvent.getParameter("arguments").OrderID + ")").getObject();
-        _readSignature(objContext.OrderID, objContext.EmployeeID); 
+        if (objContext) {
+            _readSignature.bind(this)(objContext.OrderID, objContext.EmployeeID);
+        }
     };
     function _readSignature(orderId, employeeId) {
 
         //Read Signature Image
-        this.getView().getModel("incidenceModel").read("/SignatureSet(OrderId='" + orderId
-            + "',SapId='" + this.getOwnerComponent().SapId
-            + "',EmployeeId='" + employeeId + "')", {
+        this.getView().getModel("incidenceModel").read("/SignatureSet(OrderId='" + orderId + "',SapId='" + this.getOwnerComponent().SapId + "',EmployeeId='" + employeeId + "')", {
             success: function (data) {
                 const signature = this.getView().byId("signature");
                 if (data.MediaContent !== "") {
