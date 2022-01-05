@@ -4,59 +4,73 @@
           xmlns="sap.m"
           xmlns:core="sap.ui.core"
           xmlns:l="sap.ui.layout"
-          xmlns:f="sap.ui.layout.form">
-    <Page>
+          xmlns:f="sap.ui.layout.form"
+          xmlns:sco="logaligroup.employees.control" >
+    <Page id="pageOrder">
         <customHeader>
-            <Bar>
+            <Bar id="barId">
                 <contentLeft>
-                    <Button icon="sap-icon://nav-back" press="onBack"></Button>
+                    <Button id="back" icon="sap-icon://nav-back" press="onBack"></Button>
                 </contentLeft>
                 <contentMiddle>
-                    <Text text="{i18n>orderID} {odataNorthwind>OrderID}"></Text>
+                    <Text id="txtorden" text="{i18n>orderID} {odataNorthwind>OrderID}"></Text>
                 </contentMiddle>
             </Bar>
         </customHeader>
         <content>
-            <Panel headerText="{i18n>customerID}: {odataNorthwind>CustomerID}">
-                <l:Grid defaultSpan="L6 M6 S12">
-                    <f:Form editable="false">
+            <Panel id="panelCust" headerText="{i18n>customerID}: {odataNorthwind>CustomerID}">
+                <l:Grid id="layaut1" defaultSpan="L6 M6 S12">
+                    <f:Form id="form1" editable="false">
                         <f:layout>
-                            <f:ResponsiveGridLayout labelSpanL="6" labelSpanM="6" labelSpanS="12"/>
+                            <f:ResponsiveGridLayout id="respGrid1" labelSpanL="6" labelSpanM="6" labelSpanS="12"/>
                         </f:layout>
                         <f:formContainers>
-                            <f:FormContainer>
+                            <f:FormContainer  id="form2">
                                 <f:formElements>
-                                    <f:FormElement label="{i18n>orderDate}">
+                                    <f:FormElement id="form3" label="{i18n>orderDate}">
                                         <f:fields>
-                                            <Text text="{path:'odataNorthwind>OrderDate', type:'sap.ui.model.odata.type.Date'}"/>
+                                            <Text id="text1" text="{path:'odataNorthwind>OrderDate', type:'sap.ui.model.odata.type.Date'}"/>
                                         </f:fields>
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>freight}">
+                                    <f:FormElement id="form4" label="{i18n>freight}">
                                         <f:fields>
-                                            <Text text="{odataNorthwind>Freight}"/>
+                                            <Text  id="text2" text="{odataNorthwind>Freight}"/>
+                                        </f:fields>                                        
+                                    </f:FormElement>
+                                    <f:FormElement id="form5" label="{i18n>shipName}">
+                                        <f:fields>
+                                            <Text  id="text3" text="{odataNorthwind>ShipName}"/>
                                         </f:fields>
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>shipName}">
+                                    <f:FormElement id="form6" label="{i18n>shipAddress}">
                                         <f:fields>
-                                            <Text text="{odataNorthwind>ShipName}"/>
+                                            <Text  id="text4" text="{odataNorthwind>ShipAddress}"/>                                            
                                         </f:fields>
                                     </f:FormElement>
-                                    <f:FormElement label="{i18n>shipAddress}">
+                                    <f:FormElement id="form7" label="{i18n>shipAddress}">
                                         <f:fields>
-                                            <Text text="{odataNorthwind>ShipAddress}"/>                                            
-                                        </f:fields>
-                                    </f:FormElement>
-                                    <f:FormElement label="{i18n>shipAddress}">
-                                        <f:fields>
-                                             <Text text="{odataNorthwind>ShipCity}, {odataNorthwind>ShipCountry}"/>
+                                             <Text  id="text5" text="{odataNorthwind>ShipCity}, {odataNorthwind>ShipCountry}"/>
                                         </f:fields>
                                     </f:FormElement>
                                 </f:formElements>
                             </f:FormContainer>
                         </f:formContainers>
                     </f:Form>
+                    <FlexBox id="flex10" class="sapUiTinyMarginTop">
+                        <sco:Signature id="signature"></sco:Signature>
+                        <Button id="butClear" text="{i18n>clear}" press="onClearSignature" class="sapUiTinyMarginBegin"></Button>
+                    </FlexBox>
                 </l:Grid>
             </Panel>
+             <Panel id="pProducts" headerText="{i18n>orderProducts}">
+                <List id="lOrderDetails" items="{path:'odataNorthwind>Order_Details', parameters:{expand : 'Product'}, factory: '.factoryOrderDetails'}"/>
+            </Panel>
         </content>
+        <footer>
+            <Toolbar id="tool">
+                <ToolbarSpacer id="toolspacer"></ToolbarSpacer>
+                <Button id="grabar" text="{i18n>saveSignature}" press="onSaveSignature"></Button>
+            </Toolbar>
+        </footer>
     </Page>
 </mvc:View>
