@@ -30,6 +30,21 @@ sap.ui.define([
 
             }
         });
+    
+        //Bind Files
+        this.byId("uploadCollection").bindAggregation("items", {
+            path: "incidenceModel>/FilesSet",
+            filters: [
+                new Filter("OrderId", FilterOperator.EQ, orderId),
+                new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
+                new Filter("EmployeeId", FilterOperator.EQ, employeeId),
+            ],
+            template: new sap.m.UploadCollectionItem({
+                documentId: "{incidenceModel>AttId}",
+                visibleEdit: false,
+                fileName: "{incidenceModel>FileName}"
+            }).attachPress(this.downloadFile)
+        });
     };
 
     return Controller.extend("logaligroup.employees.controller.OrderDetails", {
@@ -114,7 +129,6 @@ sap.ui.define([
         
         
      onFileBeforeUpload: function(oEvent) {
-
         let fileName = oEvent.getParameter("fileName");
         let objectContext = oEvent.getSource().getBindingContext("odataNorthwind").getObject();
 
@@ -128,11 +142,10 @@ sap.ui.define([
         oEvent.getParameters().addHeaderParameter(oHeaderSlug);
     },
 
-     onFileChange: function (oEvent) {
-
+    onFileChange: function (oEvent) {
         let oUploadCollection = oEvent.getSource();
 
-        // Header CSRF token - Cross-site request forgery
+        // Header CSRF token
         let oHeaderToken = new sap.m.UploadCollectionParameter({
             name: "x-csrf-token",
             value: this.getView().getModel("incidenceModel").getSecurityToken()
@@ -160,10 +173,9 @@ sap.ui.define([
         });
     },
 
-     downloadFile: function (oEvent) {
-        
+    downloadFile: function (oEvent) {        
         const sPath = oEvent.getSource().getBindingContext("incidenceModel").getPath();
         window.open("/sap/opu/odata/sap/YSAPUI5_SRV_01" + sPath + "/$value");
     }
-    });
+});
 }); 
