@@ -22,7 +22,7 @@
       ],
       "args": [
         "--open",
-        "'test/flpSandbox.html#logaligroupemployees-display'"
+        "index.html"
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
@@ -30,7 +30,7 @@
       "env": {
         "DEBUG": "--inspect",
         "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/logali/employees\"}",
-        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/sap\",\"destination\":\"Northwind\"}]",
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"destination\":\"Northwind\"},{\"path\":\"/sap\",\"destination\":\"logaligroupERP\"}]",
         "FIORI_TOOLS_UI5_VERSION": "",
         "FIORI_TOOLS_UI5_URI": "https://ui5.sap.com"
       }
